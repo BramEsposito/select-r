@@ -1,0 +1,49 @@
+var onRun = function(context) {
+  
+var selection = context.selection
+var doc = context.document
+var loop = selection.objectEnumerator()
+var newselection = []
+// TODO: check if soemthing was selected
+while (item = loop.nextObject()) {
+    f = item.frame()
+    run_through_layers(item)
+}
+if(newselection.length > 0) {
+	select(newselection)
+} else {
+	doc.showMessage("No Text Layers found")
+}
+
+
+function run_through_layers(item) {
+    log([item className]+" "+[item name])
+    if ([item className] == "MSTextLayer") newselection.push(item)
+    if ([item className] != "MSLayerGroup") return
+    var layers = item.layers()
+    var arrayLength = layers.length()
+    if (arrayLength > 0) {
+        for (var i = 0; i < arrayLength; i++) {
+            var layer = [layers objectAtIndex: i]
+            run_through_layers(layer)
+        }
+    }
+}
+
+// shamelessly stolen from @getflourish's inventory.js
+function select(layers) {
+          // make into array if only a single layer has been passed through
+          if ( !layers.length ) {
+            var layer = layers;
+            layers = [ layer ];
+        }
+
+          // deselect first
+          doc.currentPage().deselectAllLayers();
+
+          // then select all layers from the original selection
+          for (var i = 0; i < layers.length; i++) {
+              layers[i].setIsSelected(true);
+          }
+      }
+};

@@ -1,0 +1,24 @@
+{
+  "author" : "Bram Esposito",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "name" : "Select Text Layers",
+      "handlers" : {
+        "run" : "onRun"
+      },
+      "identifier" : "com.bohemiancoding.sketch.runscriptidentifier"
+    }
+  ],
+  "menu" : {
+    "items" : [
+      "com.bohemiancoding.sketch.runscriptidentifier"
+    ],
+    "title" : "Select R"
+  },
+  "identifier" : "com.example.sketch.30e3569a-ca85-499f-a8c1-7f634a6609ab",
+  "version" : "1.0",
+  "description" : "Remove all items from the current selection that are not text layers",
+  "authorEmail" : "bram@bramesposito.com",
+  "name" : "Select R"
+}
